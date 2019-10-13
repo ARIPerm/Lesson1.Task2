@@ -1,0 +1,27 @@
+c:\users\101\documents\visual studio 2015\Projects\PaternARI\PaternARI\bin\Debug\PaternARI.exe.config
+c:\users\101\documents\visual studio 2015\Projects\PaternARI\PaternARI\bin\Debug\PaternARI.exe
+c:\users\101\documents\visual studio 2015\Projects\PaternARI\PaternARI\bin\Debug\PaternARI.pdb
+c:\users\101\documents\visual studio 2015\Projects\PaternARI\PaternARI\obj\Debug\PaternARI.csprojResolveAssemblyReference.cache
+c:\users\101\documents\visual studio 2015\Projects\PaternARI\PaternARI\obj\Debug\PaternARI.exe
+c:\users\101\documents\visual studio 2015\Projects\PaternARI\PaternARI\obj\Debug\PaternARI.pdb
+G:\C#\PaternARI\PaternARI\bin\Debug\PaternARI.exe.config
+G:\C#\PaternARI\PaternARI\bin\Debug\PaternARI.exe
+G:\C#\PaternARI\PaternARI\bin\Debug\PaternARI.pdb
+G:\C#\PaternARI\PaternARI\obj\Debug\PaternARI.csprojResolveAssemblyReference.cache
+G:\C#\PaternARI\PaternARI\obj\Debug\PaternARI.csproj.CoreCompileInputs.cache
+G:\C#\PaternARI\PaternARI\obj\Debug\PaternARI.exe
+G:\C#\PaternARI\PaternARI\obj\Debug\PaternARI.pdb
+G:\C#\Занятие 1\Задание 1\Двухмерный массив\PaternARI\PaternARI\bin\Debug\PaternARI.exe.config
+G:\C#\Занятие 1\Задание 1\Двухмерный массив\PaternARI\PaternARI\bin\Debug\PaternARI.exe
+G:\C#\Занятие 1\Задание 1\Двухмерный массив\PaternARI\PaternARI\bin\Debug\PaternARI.pdb
+G:\C#\Занятие 1\Задание 1\Двухмерный массив\PaternARI\PaternARI\obj\Debug\PaternARI.csprojResolveAssemblyReference.cache
+G:\C#\Занятие 1\Задание 1\Двухмерный массив\PaternARI\PaternARI\obj\Debug\PaternARI.csproj.CoreCompileInputs.cache
+G:\C#\Занятие 1\Задание 1\Двухмерный массив\PaternARI\PaternARI\obj\Debug\PaternARI.exe
+G:\C#\Занятие 1\Задание 1\Двухмерный массив\PaternARI\PaternARI\obj\Debug\PaternARI.pdb
+C:\Users\Фвьшт\Desktop\C#\Lessons1\Tasks2\PaternARI\bin\Debug\PaternARI.exe.config
+C:\Users\Фвьшт\Desktop\C#\Lessons1\Tasks2\PaternARI\bin\Debug\PaternARI.exe
+C:\Users\Фвьшт\Desktop\C#\Lessons1\Tasks2\PaternARI\bin\Debug\PaternARI.pdb
+C:\Users\Фвьшт\Desktop\C#\Lessons1\Tasks2\PaternARI\obj\Debug\PaternARI.csprojResolveAssemblyReference.cache
+C:\Users\Фвьшт\Desktop\C#\Lessons1\Tasks2\PaternARI\obj\Debug\PaternARI.csproj.CoreCompileInputs.cache
+C:\Users\Фвьшт\Desktop\C#\Lessons1\Tasks2\PaternARI\obj\Debug\PaternARI.exe
+C:\Users\Фвьшт\Desktop\C#\Lessons1\Tasks2\PaternARI\obj\Debug\PaternARI.pdb
