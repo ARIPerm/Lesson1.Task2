@@ -12,123 +12,193 @@ namespace PaternARI
 
         static void Main(string[] args)
         {
-            bool check1 = true;
-            bool check2 = true;
-
-            Console.WriteLine("Укажите, как выбрать размер массива:\n" +
-                " 1-Автоматический выбор\n" +
-                " 2-Выбор в ручную");
-
-            int m = Convert.ToInt32(Console.ReadLine());
-            switch (m)
+            bool check1;
+            bool check2;
+            for (; ; )
             {
-                case 1:
-                    break;
-                case 2:
-                    Console.WriteLine("Укажите размер массив: ");
-                    Console.Write("Столбцы: ");
-                    int b = Convert.ToInt32(Console.ReadLine());
-                    Console.Write("Строки: ");
-                    int a = Convert.ToInt32(Console.ReadLine());
-                    presenter = new Presenter(a, b);
-                    break;
-                default:
-                    Console.WriteLine("! ! ! Некорректный выбор значения ! ! !");
-                    check1 = false;
-                    break;
-            }
-
-            if (check1)
-            {
-                Console.WriteLine();
-                Console.WriteLine("Укажите, как заполнить массив:\n" +
-                    " 1-Автоматическое заполнение\n" +
-                    " 2-Заполнить вручную");
-
-                int k = Convert.ToInt32(Console.ReadLine());
-                switch (k)
+                check1 = true;
+                check2 = true;
+                Console.WriteLine("Укажите, как желаете выбрать размер массива:\n" +
+                    " 1-Довериться программе\n" +
+                    " 2-Сделать выбор вручную");
+                int m;
+                string str = Console.ReadLine();
+                if (Cheks(str))
                 {
-                    case 1:
-                        Print();
-                        break;
-                    case 2:
-                        for (int i = 0; i < presenter.array.GetLength(0); i++)
-                        {
-                            for (int j = 0; j < presenter.array.GetLength(1); j++)
-                            {
-                                Console.Write("Введите {0} элемент {1} столбца: ", j + 1, i + 1);
-                                int a = Convert.ToInt32(Console.ReadLine());
-                                presenter.AddInMass(i, j, a);
-                            }
-                            Console.WriteLine();
-                        }
-                        Print();
-                        break;
-                    default:
-                        Console.WriteLine("! ! ! Некорректный выбор значения ! ! !");
-                        check2 = false;
-                        break;
-                }
-            }
-
-            if (check1 && check2)
-            {
-                for (; ; )
-                {
-                    Console.WriteLine("Выберите операцию:\n" +
-                            " 1-Заменить элемент\n" +
-                            " 2-Занулить элемент\n" +
-                            " 3-Вывести массив\n" +
-                            " 4-Задание по варианту\n");
-
-                    int s = Convert.ToInt32(Console.ReadLine());
-                    switch (s)
+                    m = Number(str);
+                    switch (m)
                     {
                         case 1:
-                            {
-                                Console.WriteLine("Какой элемент изменить?");
-                                Console.Write("Столбец: ");
-                                int b = Convert.ToInt32(Console.ReadLine());
-                                Console.Write("Строка: ");
-                                int a = Convert.ToInt32(Console.ReadLine());
-                                Console.WriteLine("Введите число, на которое необходимо заменить:");
-                                int value = Convert.ToInt32(Console.ReadLine());
-                                presenter.Add(a, b, value);
-                                Print();
-                                break;
-                            }
-                        case 2:
-                            {
-                                Console.WriteLine("Какой элемент занулить?");
-                                Console.Write("Столбец: ");
-                                int b = Convert.ToInt32(Console.ReadLine());
-                                Console.Write("Строка: ");
-                                int a = Convert.ToInt32(Console.ReadLine());
-                                presenter.Remove(a, b);
-                                Print();
-                                break;
-                            }
-                        case 3:
-                            Print();
                             break;
-                        case 4:
-                            presenter.DeleteAllNull();
-                            Print();
+                        case 2:
+                            Console.WriteLine("Укажите размер массив: ");
+                            Console.Write("Количество столбцов: ");
+                            string str1 = Console.ReadLine();
+                            Console.Write("Количество строк: ");
+                            string str2 = Console.ReadLine();
+                            if (Cheks(str1) && Cheks(str2))
+                            {
+                                int b = Number(str1);
+                                int a = Number(str2);
+                                presenter = new Presenter(a, b);
+                            }
+                            else
+                            {
+                                Error();
+                                check1 = false;
+                            }
                             break;
                         default:
-                            Console.WriteLine("! ! ! Некорректный выбор значения ! ! ! \n \n ");
-                            Console.WriteLine("\t\t ~ ~ ~ Повторите попытку ~ ~ ~");
+                            Console.WriteLine("! ! ! Некорректный выбор значения ! ! !");
+                            Console.WriteLine("Пожалуйста, выберете из предложенного диапазона");
+                            check1 = false;
                             break;
                     }
-                    Console.ReadKey();
+                }
+                else
+                {
+                    Error();
+                    check1 = false;
+                }
+
+                if (check1)
+                {
+                    for (; ; )
+                    {
+                        check2 = true;
+                        Console.WriteLine();
+                        Console.WriteLine("Укажите, как желаете заполнить массив:\n" +
+                            " 1-Доверить заполнение программе\n" +
+                            " 2-Заполнить массив самостоятельно");
+                        int k;
+                        str = Console.ReadLine();
+                        if (Cheks(str))
+                        {
+                            k = Number(str);
+                            switch (k)
+                            {
+                                case 1:
+                                    Print();
+                                    break;
+                                case 2:
+                                    for (int i = 0; i < presenter.array.GetLength(0); i++)
+                                    {
+                                        for (int j = 0; j < presenter.array.GetLength(1); j++)
+                                        {
+                                            Console.Write("Введите {0} элемент {1} столбца: ", j + 1, i + 1);
+                                            string str1 = Console.ReadLine();
+                                            if (Cheks(str1))
+                                            {
+                                                int num = Number(str1);
+                                                presenter.AddInMass(i, j, num);
+                                            }
+                                            else
+                                            {
+                                                Error();
+                                                check2 = false;
+                                                break;
+                                            }
+
+                                            if (check2 == false) break;
+                                        }
+                                        Console.WriteLine();
+                                        if (check2 == false) break;
+                                    }
+                                    if (check2) Print();
+                                    break;
+                                default:
+                                    Console.WriteLine("! ! ! Некорректный выбор значения ! ! !");
+                                    check2 = false;
+                                    break;
+                            }
+                        }
+                        else
+                        {
+                            Error();
+                            check2 = false;
+                        }
+                    }
+                }
+
+                if (check1 && check2)
+                {
+                    for (; ; )
+                    {
+                        Console.WriteLine("Выберите операцию, которую произвести над массивом:\n" +
+                                " 1-Заменить элемент\n" +
+                                " 2-Занулить элемент\n" +
+                                " 3-Вывести текущий массив\n" +
+                                " 4-Выполнить задание по варианту\n");
+
+                        int s;
+                        str = Console.ReadLine();
+                        if (Cheks(str))
+                        {
+                            s = Number(str);
+                            switch (s)
+                            {
+                                case 1:
+                                    {
+                                        Console.WriteLine("Какой элемент изменить?");
+                                        Console.Write("Столбец: ");
+                                        string str1 = Console.ReadLine();
+                                        Console.Write("Строка: ");
+                                        string str2 = Console.ReadLine();
+                                        Console.WriteLine("Введите число, на которое необходимо заменить:");
+                                        string str3 = Console.ReadLine();
+                                        if (Cheks(str1) && Cheks(str2) && Cheks(str3))
+                                        {
+                                            int b = Number(str1);
+                                            int a = Number(str2);
+                                            int value = Number(str3);
+                                            presenter.Add(a, b, value);
+                                            Print();
+                                        }
+                                        else
+                                        {
+                                            Error();
+                                        }
+                                        break;
+                                    }
+                                case 2:
+                                    {
+                                        Console.WriteLine("Какой элемент занулить?");
+                                        Console.Write("Столбец: ");
+                                        string str1 = Console.ReadLine();
+                                        Console.Write("Строка: ");
+                                        string str2 = Console.ReadLine();
+                                        if (Cheks(str1) && Cheks(str2))
+                                        {
+                                            int b = Number(str1);
+                                            int a = Number(str2);
+                                            presenter.Remove(a, b);
+                                            Print();
+                                        }
+                                        else
+                                        {
+                                            Error();
+                                        }
+                                        break;
+                                    }
+                                case 3:
+                                    Print();
+                                    break;
+                                case 4:
+                                    presenter.DeleteAllNull();
+                                    Print();
+                                    break;
+                                default:
+                                    Console.WriteLine("! ! ! Некорректный выбор значения ! ! ! \n \n ");
+                                    break;
+                            }
+                        }
+                        else
+                        {
+                            Error();
+                        }
+                    }
                 }
             }
-            else
-            {
-                Console.WriteLine("\t\t ~ ~ ~ Повторите попытку ~ ~ ~");
-                Console.ReadKey();
-            }
-
         }
 
         public static void Print()
@@ -143,8 +213,28 @@ namespace PaternARI
             }
             Console.WriteLine();
         }
+        public static void Error()
+        {
+            Console.WriteLine("\tВы ввели неверное значение.\n \t ~~~Повторите попытку ~~~");
+        }
+        public static bool Cheks(string str)
+        {
+            int k;
+            if (Int32.TryParse(str, out k))
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
 
-
+        public static int Number(string str)
+        {
+            int k;
+            Int32.TryParse(str, out k);
+            return k;
+        }
     }
-
 }
