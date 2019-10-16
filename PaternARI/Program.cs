@@ -10,75 +10,68 @@ namespace PaternARI
     {
         static Presenter presenter = new Presenter();
 
+        
         static void Main(string[] args)
         {
-            bool check1;
-            bool check2;
+            bool check1, check2;
             for (; ; )
             {
-                check1 = true;
-                check2 = true;
+                check1 = false;
+                check2 = false;
+
                 Console.WriteLine("Укажите, как желаете выбрать размер массива:\n" +
                     " 1-Довериться программе\n" +
                     " 2-Сделать выбор вручную");
-                int m;
-                string str = Console.ReadLine();
-                if (Cheks(str))
+
+                if (Int32.TryParse(Console.ReadLine(), out int keyCheck1))
                 {
-                    m = Number(str);
-                    switch (m)
+                    switch (keyCheck1)
                     {
                         case 1:
+                            check1 = true;
                             break;
                         case 2:
                             Console.WriteLine("Укажите размер массив: ");
                             Console.Write("Количество столбцов: ");
-                            string str1 = Console.ReadLine();
+                            string column = Console.ReadLine();
                             Console.Write("Количество строк: ");
-                            string str2 = Console.ReadLine();
-                            if (Cheks(str1) && Cheks(str2))
+                            string rows = Console.ReadLine();
+                            if (Int32.TryParse(column, out int col) && Int32.TryParse(rows, out int row))
                             {
-                                int b = Number(str1);
-                                int a = Number(str2);
-                                presenter = new Presenter(a, b);
+                                presenter = new Presenter(row, col);
+                                check1 = true;
                             }
                             else
                             {
                                 Error();
-                                check1 = false;
                             }
                             break;
                         default:
-                            Console.WriteLine("! ! ! Некорректный выбор значения ! ! !");
-                            Console.WriteLine("Пожалуйста, выберете из предложенного диапазона");
-                            check1 = false;
+                            ErrorCheck();                           
                             break;
                     }
                 }
                 else
                 {
                     Error();
-                    check1 = false;
                 }
 
                 if (check1)
                 {
                     for (; ; )
                     {
-                        check2 = true;
+                        check2 = false;
                         Console.WriteLine();
                         Console.WriteLine("Укажите, как желаете заполнить массив:\n" +
                             " 1-Доверить заполнение программе\n" +
                             " 2-Заполнить массив самостоятельно");
-                        int k;
-                        str = Console.ReadLine();
-                        if (Cheks(str))
+
+                        if (Int32.TryParse(Console.ReadLine(), out int keyCheck2))
                         {
-                            k = Number(str);
-                            switch (k)
+                            switch (keyCheck2)
                             {
                                 case 1:
-                                    Print();
+                                    check2 = true;
                                     break;
                                 case 2:
                                     for (int i = 0; i < presenter.array.GetLength(0); i++)
@@ -86,37 +79,33 @@ namespace PaternARI
                                         for (int j = 0; j < presenter.array.GetLength(1); j++)
                                         {
                                             Console.Write("Введите {0} элемент {1} столбца: ", j + 1, i + 1);
-                                            string str1 = Console.ReadLine();
-                                            if (Cheks(str1))
+                                            if (Int32.TryParse(Console.ReadLine(), out int num))
                                             {
-                                                int num = Number(str1);
                                                 presenter.AddInMass(i, j, num);
+                                                check2 = true;
                                             }
                                             else
                                             {
                                                 Error();
-                                                check2 = false;
                                                 break;
                                             }
-
                                             if (check2 == false) break;
                                         }
                                         Console.WriteLine();
                                         if (check2 == false) break;
                                     }
-                                    if (check2) Print();
                                     break;
                                 default:
-                                    Console.WriteLine("! ! ! Некорректный выбор значения ! ! !");
-                                    check2 = false;
+                                    ErrorCheck();
                                     break;
                             }
+                            Print();
                         }
                         else
                         {
                             Error();
-                            check2 = false;
                         }
+                        if (check2) break;
                     }
                 }
 
@@ -126,33 +115,28 @@ namespace PaternARI
                     {
                         Console.WriteLine("Выберите операцию, которую произвести над массивом:\n" +
                                 " 1-Заменить элемент\n" +
-                                " 2-Занулить элемент\n" +
-                                " 3-Вывести текущий массив\n" +
-                                " 4-Выполнить задание по варианту\n");
+                                " 2-Удалить строку\n" +
+                                " 3-Удалить столбец\n" +
+                                " 4-Вывести текущий массив\n" +
+                                " 5-Выполнить задание по варианту\n" + 
+                                " 6-Добавить строку\n");
 
-                        int s;
-                        str = Console.ReadLine();
-                        if (Cheks(str))
+                        if (Int32.TryParse(Console.ReadLine(), out int keyCheck3))
                         {
-                            s = Number(str);
-                            switch (s)
+                            switch (keyCheck3)
                             {
                                 case 1:
                                     {
                                         Console.WriteLine("Какой элемент изменить?");
                                         Console.Write("Столбец: ");
-                                        string str1 = Console.ReadLine();
+                                        string column = Console.ReadLine();
                                         Console.Write("Строка: ");
-                                        string str2 = Console.ReadLine();
+                                        string rows = Console.ReadLine();
                                         Console.WriteLine("Введите число, на которое необходимо заменить:");
-                                        string str3 = Console.ReadLine();
-                                        if (Cheks(str1) && Cheks(str2) && Cheks(str3))
+                                        string number = Console.ReadLine();
+                                        if (Int32.TryParse(column, out int col)&& Int32.TryParse(rows, out int row)&& Int32.TryParse(number, out int num))
                                         {
-                                            int b = Number(str1);
-                                            int a = Number(str2);
-                                            int value = Number(str3);
-                                            presenter.Add(a, b, value);
-                                            Print();
+                                            presenter.Add(row, col, num);
                                         }
                                         else
                                         {
@@ -162,17 +146,10 @@ namespace PaternARI
                                     }
                                 case 2:
                                     {
-                                        Console.WriteLine("Какой элемент занулить?");
-                                        Console.Write("Столбец: ");
-                                        string str1 = Console.ReadLine();
-                                        Console.Write("Строка: ");
-                                        string str2 = Console.ReadLine();
-                                        if (Cheks(str1) && Cheks(str2))
+                                        Console.WriteLine("Какую строку удалить?");
+                                        if (Int32.TryParse(Console.ReadLine(), out int row))
                                         {
-                                            int b = Number(str1);
-                                            int a = Number(str2);
-                                            presenter.Remove(a, b);
-                                            Print();
+                                            presenter.Delete(1,row);
                                         }
                                         else
                                         {
@@ -181,16 +158,41 @@ namespace PaternARI
                                         break;
                                     }
                                 case 3:
-                                    Print();
-                                    break;
+                                    {
+                                        Console.WriteLine("Какой столбец удалить?");
+                                        if (Int32.TryParse(Console.ReadLine(), out int col))
+                                        {
+                                            presenter.Delete(2, col);
+                                        }
+                                        else
+                                        {
+                                            Error();
+                                        }
+                                        break;
+                                    }
                                 case 4:
-                                    presenter.DeleteAllNull();
-                                    Print();
                                     break;
+                                case 5:
+                                    presenter.DeleteMin();
+                                    break;
+                                case 6:
+                                    {
+                                        Console.WriteLine("Какую строку добавить?");
+                                        if (Int32.TryParse(Console.ReadLine(), out int row))
+                                        {
+                                            presenter.AddRow(row);
+                                        }
+                                        else
+                                        {
+                                            Error();
+                                        }
+                                        break;
+                                    }
                                 default:
-                                    Console.WriteLine("! ! ! Некорректный выбор значения ! ! ! \n \n ");
+                                    ErrorCheck();
                                     break;
                             }
+                            Print();
                         }
                         else
                         {
@@ -217,24 +219,11 @@ namespace PaternARI
         {
             Console.WriteLine("\tВы ввели неверное значение.\n \t ~~~Повторите попытку ~~~");
         }
-        public static bool Cheks(string str)
-        {
-            int k;
-            if (Int32.TryParse(str, out k))
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
-        }
 
-        public static int Number(string str)
+        public static void ErrorCheck()
         {
-            int k;
-            Int32.TryParse(str, out k);
-            return k;
+            Console.WriteLine("! ! ! Некорректный выбор значения ! ! ! \n \n ");
+            Console.WriteLine("Пожалуйста, выберете из предложенного диапазона");
         }
     }
 }

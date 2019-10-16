@@ -51,42 +51,131 @@ namespace PaternARI
             }
             else
             {
-                Console.WriteLine("! ! ! Вы указали элемент, выходящий за размер массива ! ! !");
+                Miss();
             }
         }
 
-        public void Remove(int a, int b)
+        public void Delete(int check, int number)
         {
-            a--;b--;
-            if (array.GetLength(0) > a && array.GetLength(1) > b )
+            if (check == 1)
             {
-                array[a, b] = 0;
-            }
-            else
-            {
-                Console.WriteLine("! ! ! Вы указали элемент, выходящий за размер массива ! ! !");
-            }
-        }
-
-        public void DeleteAllNull()
-        {
-            int min=0;
-            int index=0;
-             for (int i = 0; i < array.GetLength(0); i++)
-             {
-                for(int j=0;j<array.GetLength(1);j++)
+                if (array.GetLength(0) > (number - 1))
                 {
-                    if (array[i, j] <min)
+                    int N1 = array.GetLength(0);
+                    int N2 = array.GetLength(1);
+                    int[,] temp = new int[N1, N2];
+                    temp = array;
+                    array = new int[N1 - 1, N2];
+                    int indexRow;
+                    for (int i = 0; i < array.GetLength(0); i++)
                     {
-                        min = array[i,j];
-                        index = j;
+                        indexRow = i;
+                        if (i >= (number - 1))
+                        {
+                            indexRow++;
+                        }
+                        for (int j = 0; j < array.GetLength(1); j++)
+                        {
+                            array[i, j] = temp[indexRow, j];
+                        }
                     }
                 }
-             }
-            Console.WriteLine(index);
-
+                else
+                {
+                    Miss();
+                }
+            }
+            if (check == 2)
+            {
+                if (array.GetLength(1) > (number - 1))
+                {
+                    int N1 = array.GetLength(0);
+                    int N2 = array.GetLength(1);
+                    int[,] temp = new int[N1, N2];
+                    temp = array;
+                    array = new int[N1, N2 - 1];
+                    int indexCol;
+                    for (int i = 0; i < array.GetLength(0); i++)
+                    {
+                        for (int j = 0; j < array.GetLength(1); j++)
+                        {
+                            indexCol = j;
+                            if (j >= (number - 1))
+                            {
+                                indexCol++;
+                            }
+                            array[i, j] = temp[i, indexCol];
+                        }
+                    }
+                }
+                else
+                {
+                    Miss();
+                }
+            }
         }
 
+        public void DeleteMin()
+        {
+            int indexJ = 10;
+            int min = 10;
+            for (int i = 0; i < array.GetLength(0); i++)
+            {
+                for (int j = 0; j < array.GetLength(1); j++)
+                {
+                    if (array[i, j] < min)
+                    {
+                        min = array[i, j];
+                        indexJ = j + 1;
+                    }
+                }
+            }
+            Delete(2, indexJ);
+        }
+
+        public void AddRow(int row)
+        {
+            int N1 = array.GetLength(0);
+            int N2 = array.GetLength(1);
+            int[,] temp = new int[N1, N2];
+            temp = array;
+            array = new int[N1 + 1, N2];
+            int indexRow;
+            bool flagNew = false;
+            bool flagAfter = false;
+            for (int i = 0; i < array.GetLength(0); i++)
+            {
+                indexRow = i;
+                if (i == (row - 1))
+                {
+                    flagNew = true;
+                }
+                if(flagAfter)
+                {
+                    indexRow--;
+                }
+                for (int j = 0; j < array.GetLength(1); j++)
+                {
+                    if (flagNew)
+                    {
+                        array[i, j] = rnd.Next(0, 10);
+                        flagAfter = true;
+                    }
+                    else
+                    {
+                        array[i, j] = temp[indexRow, j];
+                    }
+                }
+                flagNew = false;
+            }
+        }
+
+        public void Miss()
+        {
+            Console.WriteLine("! ! ! Вы указали элемент, выходящий за размер массива ! ! !");
+        }
     }
 
 }
+
+
